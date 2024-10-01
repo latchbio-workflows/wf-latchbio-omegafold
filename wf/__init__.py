@@ -1,7 +1,17 @@
 from latch.resources.workflow import workflow
 from latch.types.directory import LatchOutputDir
 from latch.types.file import LatchFile
-from latch.types.metadata import LatchAuthor, LatchMetadata, LatchParameter
+from latch.types.metadata import (
+    Fork,
+    ForkBranch,
+    LatchAuthor,
+    LatchMetadata,
+    LatchParameter,
+    LatchRule,
+    Params,
+    Section,
+    Spoiler,
+)
 
 from wf.task import task
 
@@ -11,6 +21,17 @@ metadata = LatchMetadata(
         name="LatchBio",
     ),
     parameters={
+        "run_name": LatchParameter(
+            display_name="Run Name",
+            description="Name of run",
+            batch_table_column=True,
+            rules=[
+                LatchRule(
+                    regex=r"^[a-zA-Z0-9_-]+$",
+                    message="Run name must contain only letters, digits, underscores, and dashes. No spaces are allowed.",
+                )
+            ],
+        ),
         "input_file": LatchParameter(
             display_name="Input File",
             batch_table_column=True,  # Show this parameter in batched mode.
@@ -24,7 +45,9 @@ metadata = LatchMetadata(
 
 
 @workflow(metadata)
-def template_workflow(
-    input_file: LatchFile, output_directory: LatchOutputDir
-) -> LatchFile:
-    return task(input_file=input_file, output_directory=output_directory)
+def omegafold_workflow(
+    run_name: str, input_file: LatchFile, output_directory: LatchOutputDir
+) -> LatchOutputDir:
+    return task(
+        run_name=run_name, input_file=input_file, output_directory=output_directory
+    )
