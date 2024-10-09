@@ -52,18 +52,13 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update --yes && \
     xargs apt-get install --yes aria2 git wget unzip
 
-# Install Miniconda
-# RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh && \
-#     bash miniconda.sh -b -p /root/miniconda && \
-#     rm miniconda.sh
-
 RUN pip3 install torch torchvision torchaudio biopython
 
 RUN git clone https://github.com/HeliXonProtein/OmegaFold
 
 # Latch SDK
 # DO NOT REMOVE
-RUN pip install latch==2.52.2
+RUN pip install latch==2.53.5
 RUN mkdir /opt/latch
 
 # Copy workflow data (use .dockerignore to skip files)
