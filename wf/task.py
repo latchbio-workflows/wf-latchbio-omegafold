@@ -12,7 +12,7 @@ from latch.types.file import LatchFile
 sys.stdout.reconfigure(line_buffering=True)
 
 
-@v100_x1_task
+@small_gpu_task
 def omegafold_task(
     run_name: str,
     input_fasta: LatchFile,
@@ -81,6 +81,7 @@ def omegafold_task(
     except Exception as e:
         print("FAILED")
         message("error", {"title": "OmegaFold failed", "body": f"{e}"})
+        sys.exit(1)
 
     print("-" * 60)
     print("Returning results")

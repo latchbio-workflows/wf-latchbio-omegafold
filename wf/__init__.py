@@ -20,6 +20,9 @@ from wf.task import omegafold_task
 flow = [
     Section(
         "Input",
+        Text(
+            "The input file should be a standard FASTA file containing one or multiple sequences, with each sequence preceded by a comment line starting with either '>' or ':' above the amino acid sequence."
+        ),
         Params("input_fasta"),
     ),
     Section(
@@ -64,7 +67,7 @@ metadata = LatchMetadata(
         ),
         "input_fasta": LatchParameter(
             display_name="Input FASTA",
-            description="The input fasta file",
+            description="Input FASTA file - containing one or multiple sequences, with each sequence preceded by a comment line starting with either '>' or ':' above the amino acid sequence.",
             batch_table_column=True,
         ),
         "output_directory": LatchParameter(
@@ -128,6 +131,10 @@ def omegafold_workflow(
 ) -> LatchOutputDir:
     """
     OmegaFold: High-resolution de novo structure prediction from protein sequences
+
+    <p align="center">
+        <img src="https://ruiwang1998.com/publication/omegafold/featured.png" alt="OmegaFold figure" width="800px"/>
+    </p>
 
     <html>
     <p align="center">
