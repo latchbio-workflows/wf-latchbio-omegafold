@@ -50,7 +50,7 @@ metadata = LatchMetadata(
     author=LatchAuthor(
         name="Ruidong Wu et al.",
     ),
-    repository="https://github.com/HeliXonProtein/OmegaFold",
+    repository="https://github.com/latchbio-workflows/wf-latchbio-omegafold",
     license="Apache-2.0",
     tags=["Protein Engineering"],
     parameters={
